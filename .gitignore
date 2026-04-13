@@ -29,3 +29,6 @@ htmlcov/
 .mypy_cache/
 node_modules/
 .vercel/
+
+.vercel
+.env*.local
