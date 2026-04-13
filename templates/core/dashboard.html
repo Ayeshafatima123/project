@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - SurveyRewards{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Welcome Section -->
+    <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 mb-8 text-white">
+        <h1 class="text-4xl font-bold mb-2">Welcome back! 👋</h1>
+        <p class="text-blue-100">Your referral code: <span class="bg-white text-blue-600 px-3 py-1 rounded font-bold">{{ user.referral_code }}</span></p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-2xl p-6 shadow-lg">
+            <div class="flex items-center justify-between mb-4">
+                <div class="bg-green-100 w-14 h-14 rounded-full flex items-center justify-center">
+                    <i class="fas fa-wallet text-2xl text-green-600"></i>
+                </div>
+            </div>
+            <p class="text-gray-600 text-sm">Current Balance</p>
+            <p class="text-3xl font-bold text-green-600">${{ balance|floatformat:2 }}</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-6 shadow-lg">
+            <div class="flex items-center justify-between mb-4">
+                <div class="bg-blue-100 w-14 h-14 rounded-full flex items-center justify-center">
+                    <i class="fas fa-dollar-sign text-2xl text-blue-600"></i>
+                </div>
+            </div>
+            <p class="text-gray-600 text-sm">Total Earned</p>
+            <p class="text-3xl font-bold text-blue-600">${{ total_earned|floatformat:2 }}</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-6 shadow-lg">
+            <div class="flex items-center justify-between mb-4">
+                <div class="bg-purple-100 w-14 h-14 rounded-full flex items-center justify-center">
+                    <i class="fas fa-money-bill-wave text-2xl text-purple-600"></i>
+                </div>
+            </div>
+            <p class="text-gray-600 text-sm">Total Withdrawn</p>
+            <p class="text-3xl font-bold text-purple-600">${{ total_withdrawn|floatformat:2 }}</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-6 shadow-lg">
+            <div class="flex items-center justify-between mb-4">
+                <div class="bg-orange-100 w-14 h-14 rounded-full flex items-center justify-center">
+                    <i class="fas fa-clipboard-check text-2xl text-orange-600"></i>
+                </div>
+            </div>
+            <p class="text-gray-600 text-sm">Surveys Completed</p>
+            <p class="text-3xl font-bold text-orange-600">{{ completed_surveys }}</p>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <a href="{% url 'survey_list' %}" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+            <i class="fas fa-clipboard-list text-5xl mb-4"></i>
+            <h3 class="text-2xl font-bold mb-2">Take Surveys</h3>
+            <p class="text-blue-100">Earn money by completing available surveys</p>
+        </a>
+        
+        <a href="{% url 'withdraw' %}" class="bg-gradient-to-r from-green-500 to-green-600 text-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+            <i class="fas fa-money-check-alt text-5xl mb-4"></i>
+            <h3 class="text-2xl font-bold mb-2">Withdraw</h3>
+            <p class="text-green-100">Cash out your earnings via JazzCash, EasyPaisa, or PayPal</p>
+        </a>
+        
+        <a href="{% url 'transaction_history' %}" class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+            <i class="fas fa-history text-5xl mb-4"></i>
+            <h3 class="text-2xl font-bold mb-2">History</h3>
+            <p class="text-purple-100">View all your transactions and withdrawals</p>
+        </a>
+    </div>
+
+    <!-- Available Surveys -->
+    {% if available_surveys %}
+    <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+        <h2 class="text-3xl font-bold mb-6">Available Surveys</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for survey in available_surveys %}
+            <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-blue-500 transition">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">{{ survey.get_category_display }}</span>
+                    <span class="text-2xl font-bold text-green-600">${{ survey.reward }}</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">{{ survey.title }}</h3>
+                <p class="text-gray-600 mb-4 text-sm">{{ survey.description|truncatewords:15 }}</p>
+                <div class="flex justify-between text-sm text-gray-500 mb-4">
+                    <span><i class="fas fa-clock mr-1"></i>{{ survey.estimated_time }} min</span>
+                    <span><i class="fas fa-question-circle mr-1"></i>{{ survey.questions_count }} Qs</span>
+                </div>
+                <a href="{% url 'survey_detail' survey.id %}" class="block text-center bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition">
+                    Take Survey
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Recent Activity -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Recent Transactions -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+            <h2 class="text-2xl font-bold mb-6">Recent Transactions</h2>
+            {% if recent_transactions %}
+                <div class="space-y-4">
+                    {% for transaction in recent_transactions %}
+                    <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                        <div>
+                            <p class="font-semibold">{{ transaction.description }}</p>
+                            <p class="text-sm text-gray-500">{{ transaction.created_at|date:"M d, Y" }}</p>
+                        </div>
+                        <span class="text-xl font-bold {% if transaction.amount > 0 %}text-green-600{% else %}text-red-600{% endif %}">
+                            {% if transaction.amount > 0 %}+{% endif %}${{ transaction.amount|floatformat:2 }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-gray-500 text-center py-8">No transactions yet</p>
+            {% endif %}
+        </div>
+
+        <!-- Recent Withdrawals -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+            <h2 class="text-2xl font-bold mb-6">Recent Withdrawals</h2>
+            {% if recent_withdrawals %}
+                <div class="space-y-4">
+                    {% for withdrawal in recent_withdrawals %}
+                    <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                        <div>
+                            <p class="font-semibold">{{ withdrawal.method.name }}</p>
+                            <p class="text-sm text-gray-500">{{ withdrawal.created_at|date:"M d, Y" }}</p>
+                            <span class="text-xs px-2 py-1 rounded-full {% if withdrawal.status == 'completed' %}bg-green-100 text-green-700{% elif withdrawal.status == 'pending' %}bg-yellow-100 text-yellow-700{% elif withdrawal.status == 'processing' %}bg-blue-100 text-blue-700{% else %}bg-red-100 text-red-700{% endif %}">
+                                {{ withdrawal.get_status_display }}
+                            </span>
+                        </div>
+                        <span class="text-xl font-bold text-purple-600">${{ withdrawal.amount|floatformat:2 }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-gray-500 text-center py-8">No withdrawals yet</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

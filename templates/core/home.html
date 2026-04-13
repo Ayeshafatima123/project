@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SurveyRewards - Earn Money by Completing Surveys{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h1 class="text-5xl font-bold mb-6">Earn Money by Sharing Your Opinion</h1>
+                <p class="text-xl mb-8 text-blue-100">Complete simple surveys and get paid instantly via JazzCash, EasyPaisa, PayPal, or Bank Transfer. Join 300,000+ users already earning!</p>
+                <div class="flex space-x-4">
+                    <a href="{% url 'register' %}" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition shadow-lg">
+                        <i class="fas fa-rocket mr-2"></i>Start Earning Now
+                    </a>
+                    <a href="#how-it-works" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-600 transition">
+                        <i class="fas fa-play-circle mr-2"></i>How It Works
+                    </a>
+                </div>
+                <div class="mt-8 flex items-center space-x-6">
+                    <div class="flex items-center">
+                        <i class="fas fa-users text-3xl mr-2"></i>
+                        <div>
+                            <p class="text-2xl font-bold">300K+</p>
+                            <p class="text-blue-200">Active Users</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-dollar-sign text-3xl mr-2"></i>
+                        <div>
+                            <p class="text-2xl font-bold">$200M+</p>
+                            <p class="text-blue-200">Paid Out</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden md:block">
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&h=500&fit=crop" alt="Earn Money" class="rounded-2xl shadow-2xl">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-12 bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <p class="text-4xl font-bold text-blue-600">300K+</p>
+                <p class="text-gray-600 mt-2">Happy Users</p>
+            </div>
+            <div>
+                <p class="text-4xl font-bold text-green-600">$200M+</p>
+                <p class="text-gray-600 mt-2">Total Paid</p>
+            </div>
+            <div>
+                <p class="text-4xl font-bold text-purple-600">1M+</p>
+                <p class="text-gray-600 mt-2">Surveys Completed</p>
+            </div>
+            <div>
+                <p class="text-4xl font-bold text-orange-600">4.8★</p>
+                <p class="text-gray-600 mt-2">User Rating</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section id="how-it-works" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-12">How It Works</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-2xl shadow-lg text-center hover:shadow-2xl transition">
+                <div class="bg-blue-600 text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl font-bold">
+                    1
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Sign Up Free</h3>
+                <p class="text-gray-600">Create your free account in less than 2 minutes. No credit card required!</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-lg text-center hover:shadow-2xl transition">
+                <div class="bg-green-600 text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl font-bold">
+                    2
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Complete Surveys</h3>
+                <p class="text-gray-600">Answer simple questions and earn $0.50 to $5.00 per survey. New surveys added daily!</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-lg text-center hover:shadow-2xl transition">
+                <div class="bg-purple-600 text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl font-bold">
+                    3
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Get Paid</h3>
+                <p class="text-gray-600">Withdraw your earnings via JazzCash, EasyPaisa, PayPal, or Bank Transfer. Fast processing!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Payment Methods -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-4">Trusted Payment Methods</h2>
+        <p class="text-xl text-center text-gray-600 mb-12">Withdraw your earnings using your preferred payment method</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-2xl text-center shadow-lg hover:shadow-2xl transition">
+                <i class="fas fa-mobile-alt text-6xl text-red-600 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">JazzCash</h3>
+                <p class="text-gray-600">Instant withdrawal within 24-48 hours</p>
+            </div>
+            <div class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl text-center shadow-lg hover:shadow-2xl transition">
+                <i class="fas fa-mobile-alt text-6xl text-green-600 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">EasyPaisa</h3>
+                <p class="text-gray-600">Fast and secure mobile payments</p>
+            </div>
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl text-center shadow-lg hover:shadow-2xl transition">
+                <i class="fab fa-paypal text-6xl text-blue-600 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">PayPal</h3>
+                <p class="text-gray-600">International payments available</p>
+            </div>
+            <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl text-center shadow-lg hover:shadow-2xl transition">
+                <i class="fas fa-university text-6xl text-purple-600 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Bank Transfer</h3>
+                <p class="text-gray-600">Direct to your bank account</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Available Surveys -->
+{% if surveys %}
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-4">Latest Surveys</h2>
+        <p class="text-xl text-center text-gray-600 mb-12">Start earning with these available surveys</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for survey in surveys %}
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-2">
+                <div class="bg-gradient-to-r from-blue-500 to-purple-500 p-6 text-white">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="bg-white text-blue-600 px-3 py-1 rounded-full text-sm font-semibold">{{ survey.get_category_display }}</span>
+                        <span class="text-3xl font-bold">${{ survey.reward }}</span>
+                    </div>
+                    <h3 class="text-xl font-bold">{{ survey.title }}</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-600 mb-4">{{ survey.description|truncatewords:20 }}</p>
+                    <div class="flex justify-between text-sm text-gray-500 mb-4">
+                        <span><i class="fas fa-clock mr-1"></i>{{ survey.estimated_time }} mins</span>
+                        <span><i class="fas fa-question-circle mr-1"></i>{{ survey.questions_count }} questions</span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">{{ survey.get_difficulty_display }}</span>
+                    </div>
+                    <a href="{% url 'register' %}" class="block text-center bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition">
+                        Take Survey <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-12">
+            <a href="{% url 'register' %}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition">
+                View All Surveys <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Features -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-12">Why Choose SurveyRewards?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-shield-alt text-4xl text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">100% Secure</h3>
+                <p class="text-gray-600">Your data is protected with enterprise-grade encryption</p>
+            </div>
+            <div class="text-center">
+                <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-bolt text-4xl text-green-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Fast Payments</h3>
+                <p class="text-gray-600">Get your money within 24-48 hours via JazzCash or EasyPaisa</p>
+            </div>
+            <div class="text-center">
+                <div class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-gift text-4xl text-purple-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Daily Rewards</h3>
+                <p class="text-gray-600">New surveys added every day with great rewards</p>
+            </div>
+            <div class="text-center">
+                <div class="bg-orange-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-users text-4xl text-orange-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Referral Bonus</h3>
+                <p class="text-gray-600">Earn $1.00 for every friend you refer plus 10% of their earnings</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-20 bg-gradient-to-r from-blue-50 to-purple-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-12">What Our Users Say</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-2xl shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="text-yellow-500 text-2xl">★★★★★</div>
+                </div>
+                <p class="text-gray-600 mb-6">"I've earned over $500 in just 2 months! JazzCash withdrawals are super fast. Highly recommended!"</p>
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">A</div>
+                    <div>
+                        <p class="font-bold">Ahmed Khan</p>
+                        <p class="text-gray-500">Pakistan</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="text-yellow-500 text-2xl">★★★★★</div>
+                </div>
+                <p class="text-gray-600 mb-6">"Best survey platform! Easy surveys and quick payments via EasyPaisa. Already withdrawn $300!"</p>
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">S</div>
+                    <div>
+                        <p class="font-bold">Sara Ali</p>
+                        <p class="text-gray-500">Pakistan</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="text-yellow-500 text-2xl">★★★★★</div>
+                </div>
+                <p class="text-gray-600 mb-6">"Legitimate platform with real payments. PayPal withdrawals work perfectly. Great extra income!"</p>
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">M</div>
+                    <div>
+                        <p class="font-bold">Muhammad Ali</p>
+                        <p class="text-gray-500">United Kingdom</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-4xl font-bold mb-6">Ready to Start Earning?</h2>
+        <p class="text-xl mb-8 text-blue-100">Join thousands of users earning money daily by completing simple surveys. Free registration, instant access!</p>
+        <a href="{% url 'register' %}" class="inline-block bg-white text-blue-600 px-12 py-5 rounded-lg font-bold text-xl hover:bg-gray-100 transition shadow-2xl">
+            <i class="fas fa-rocket mr-2"></i>Create Free Account Now
+        </a>
+        <p class="mt-6 text-blue-200"><i class="fas fa-check-circle mr-2"></i>No credit card required | <i class="fas fa-check-circle mr-2"></i>Instant access | <i class="fas fa-check-circle mr-2"></i>Earn immediately</p>
+    </div>
+</section>
+{% endblock %}

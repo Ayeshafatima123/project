@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center">Frequently Asked Questions</h1>
+    <div class="space-y-4">
+        {% for faq in faqs %}
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <button class="w-full text-left p-6 font-bold text-lg hover:bg-gray-50 faq-toggle">
+                {{ faq.question }} <i class="fas fa-chevron-down float-right"></i>
+            </button>
+            <div class="hidden p-6 bg-gray-50 faq-answer">
+                <p class="text-gray-700">{{ faq.answer }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+document.querySelectorAll('.faq-toggle').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const answer = this.nextElementSibling;
+        const icon = this.querySelector('i');
+        answer.classList.toggle('hidden');
+        icon.classList.toggle('fa-chevron-down');
+        icon.classList.toggle('fa-chevron-up');
+    });
+});
+</script>
+{% endblock %}

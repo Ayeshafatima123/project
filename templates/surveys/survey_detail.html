@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="bg-white rounded-2xl p-8 shadow-lg">
+        <h1 class="text-4xl font-bold mb-6">{{ survey.title }}</h1>
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <p class="text-lg"><strong>Reward:</strong> <span class="text-green-600 font-bold text-2xl">${{ survey.reward }}</span></p>
+                    <p class="text-gray-600"><strong>Time:</strong> {{ survey.estimated_time }} minutes | <strong>Questions:</strong> {{ survey.questions_count }}</p>
+                </div>
+                <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full font-bold">{{ survey.get_difficulty_display }}</span>
+            </div>
+        </div>
+        <p class="text-gray-700 mb-6">{{ survey.description }}</p>
+        <a href="{% url 'start_survey' survey.id %}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition">
+            Start Survey <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Survey - {{ survey.title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="bg-white rounded-2xl p-8 shadow-lg">
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-xl mb-8">
+            <h1 class="text-3xl font-bold mb-2">{{ survey.title }}</h1>
+            <div class="flex items-center justify-between">
+                <p class="text-blue-100">Reward: <span class="font-bold text-2xl">${{ survey.reward }}</span></p>
+                <p class="text-blue-100">Time: {{ survey.estimated_time }} mins</p>
+            </div>
+        </div>
+
+        <form method="post" action="{% url 'submit_survey' survey.id %}">
+            {% csrf_token %}
+            
+            {% for question in questions %}
+            <div class="mb-8 p-6 bg-gray-50 rounded-xl">
+                <p class="text-lg font-semibold mb-4">Question {{ forloop.counter }}: {{ question.question_text }}</p>
+                
+                {% if question.question_type == 'multiple_choice' %}
+                    {% for option in question.options %}
+                    <label class="block mb-3 cursor-pointer">
+                        <input type="radio" name="question_{{ question.id }}" value="{{ option }}" required class="mr-2">
+                        <span class="text-gray-700">{{ option }}</span>
+                    </label>
+                    {% endfor %}
+                    
+                {% elif question.question_type == 'yes_no' %}
+                    <label class="block mb-3 cursor-pointer">
+                        <input type="radio" name="question_{{ question.id }}" value="Yes" required class="mr-2">
+                        <span class="text-gray-700">Yes</span>
+                    </label>
+                    <label class="block mb-3 cursor-pointer">
+                        <input type="radio" name="question_{{ question.id }}" value="No" required class="mr-2">
+                        <span class="text-gray-700">No</span>
+                    </label>
+                    
+                {% elif question.question_type == 'rating' %}
+                    <div class="flex space-x-4">
+                        {% for i in "12345" %}
+                        <label class="cursor-pointer">
+                            <input type="radio" name="question_{{ question.id }}" value="{{ forloop.counter }}" required class="hidden rating-input">
+                            <span class="text-4xl rating-star hover:text-yellow-500">★</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                    
+                {% elif question.question_type == 'text' %}
+                    <textarea name="question_{{ question.id }}" required rows="3" 
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="Type your answer here..."></textarea>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-lg font-bold text-xl transition">
+                <i class="fas fa-check-circle mr-2"></i>Submit & Earn ${{ survey.reward }}
+            </button>
+        </form>
+    </div>
+</div>
+
+<style>
+.rating-input:checked ~ .rating-star {
+    color: #fbbf24;
+}
+.rating-star {
+    transition: color 0.2s ease;
+}
+.rating-star:hover {
+    color: #fbbf24;
+}
+</style>
+{% endblock %}

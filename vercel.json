@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "survey_rewards_site/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
+    },
+    {
+      "src": "static/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "survey_rewards_site/wsgi.py"
+    }
+  ],
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "survey_rewards_site.settings",
+    "DJANGO_SECRET_KEY": "@secret-key-env",
+    "DEBUG": "False",
+    "ALLOWED_HOSTS": ".vercel.app,.now.sh",
+    "EMAIL_BACKEND": "django.core.mail.backends.smtp.EmailBackend",
+    "EMAIL_HOST": "smtp.gmail.com",
+    "EMAIL_PORT": "587",
+    "EMAIL_USE_TLS": "True",
+    "EMAIL_HOST_USER": "@email-env",
+    "EMAIL_HOST_PASSWORD": "@password-env",
+    "EASYPAISA_STORE_ID": "@easypaisa-store-id-env",
+    "EASYPAISA_PASSWORD": "@easypaisa-password-env",
+    "EASYPAISA_IS_PRODUCTION": "False"
+  }
+}

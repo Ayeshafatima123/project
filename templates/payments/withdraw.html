@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block title %}Withdraw - SurveyRewards{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="mb-8">
+        <h1 class="text-4xl font-bold mb-2">Withdraw Your Earnings 💰</h1>
+        <p class="text-gray-600">Choose your preferred payment method and cash out</p>
+    </div>
+
+    <!-- Balance Card -->
+    <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-2xl p-8 mb-8 text-white shadow-xl">
+        <p class="text-green-100 text-lg mb-2">Available Balance</p>
+        <p class="text-5xl font-bold mb-4">${{ balance|floatformat:2 }}</p>
+        <div class="grid grid-cols-3 gap-4 text-center">
+            <div>
+                <p class="text-sm text-green-100">Minimum Withdrawal</p>
+                <p class="font-bold">$5.00</p>
+            </div>
+            <div>
+                <p class="text-sm text-green-100">Processing Time</p>
+                <p class="font-bold">24-48 hrs</p>
+            </div>
+            <div>
+                <p class="text-sm text-green-100">Success Rate</p>
+                <p class="font-bold">99.9%</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdrawal Form -->
+    <div class="bg-white rounded-2xl p-8 shadow-lg">
+        <h2 class="text-2xl font-bold mb-6">Select Payment Method</h2>
+        
+        <form method="post" action="{% url 'submit_withdrawal' %}">
+            {% csrf_token %}
+            
+            <!-- Payment Method Selection -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <label class="payment-method-card cursor-pointer">
+                    <input type="radio" name="method" value="1" class="hidden" required>
+                    <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-red-500 transition text-center">
+                        <i class="fas fa-mobile-alt text-5xl text-red-600 mb-3"></i>
+                        <h3 class="text-xl font-bold mb-2">JazzCash</h3>
+                        <p class="text-gray-600 text-sm">24-48 hours processing</p>
+                        <p class="text-green-600 font-semibold mt-2">Min: $5.00</p>
+                    </div>
+                </label>
+
+                <label class="payment-method-card cursor-pointer">
+                    <input type="radio" name="method" value="2" class="hidden">
+                    <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-green-500 transition text-center">
+                        <i class="fas fa-mobile-alt text-5xl text-green-600 mb-3"></i>
+                        <h3 class="text-xl font-bold mb-2">EasyPaisa</h3>
+                        <p class="text-gray-600 text-sm">24-48 hours processing</p>
+                        <p class="text-green-600 font-semibold mt-2">Min: $5.00</p>
+                    </div>
+                </label>
+
+                <label class="payment-method-card cursor-pointer">
+                    <input type="radio" name="method" value="3" class="hidden">
+                    <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-blue-500 transition text-center">
+                        <i class="fab fa-paypal text-5xl text-blue-600 mb-3"></i>
+                        <h3 class="text-xl font-bold mb-2">PayPal</h3>
+                        <p class="text-gray-600 text-sm">2-3 business days</p>
+                        <p class="text-green-600 font-semibold mt-2">Min: $10.00</p>
+                    </div>
+                </label>
+
+                <label class="payment-method-card cursor-pointer">
+                    <input type="radio" name="method" value="4" class="hidden">
+                    <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-purple-500 transition text-center">
+                        <i class="fas fa-university text-5xl text-purple-600 mb-3"></i>
+                        <h3 class="text-xl font-bold mb-2">Bank Transfer</h3>
+                        <p class="text-gray-600 text-sm">3-5 business days</p>
+                        <p class="text-green-600 font-semibold mt-2">Min: $20.00</p>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Amount -->
+            <div class="mb-6">
+                <label class="block text-gray-700 font-semibold mb-2">
+                    <i class="fas fa-dollar-sign mr-1"></i> Withdrawal Amount
+                </label>
+                <input type="number" name="amount" step="0.01" min="5" max="{{ balance|floatformat:2 }}" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                       placeholder="Enter amount" required>
+                <p class="text-sm text-gray-500 mt-1">Maximum: ${{ balance|floatformat:2 }}</p>
+            </div>
+
+            <!-- Account Details -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-id-card mr-1"></i> Account Number
+                    </label>
+                    <input type="text" name="account_number" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="e.g., 03001234567" required>
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-user mr-1"></i> Account Holder Name
+                    </label>
+                    <input type="text" name="account_name" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="e.g., Ahmed Khan" required>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-lg font-bold text-xl transition">
+                <i class="fas fa-paper-plane mr-2"></i>Submit Withdrawal Request
+            </button>
+        </form>
+    </div>
+
+    <!-- Payment Info -->
+    <div class="mt-8 bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+        <h3 class="text-xl font-bold mb-4 text-blue-900">
+            <i class="fas fa-info-circle mr-2"></i>Important Information
+        </h3>
+        <ul class="space-y-2 text-blue-800">
+            <li><i class="fas fa-check mr-2"></i>JazzCash & EasyPaisa: Withdrawals processed within 24-48 hours</li>
+            <li><i class="fas fa-check mr-2"></i>PayPal: Usually processed within 2-3 business days</li>
+            <li><i class="fas fa-check mr-2"></i>Bank Transfer: Takes 3-5 business days</li>
+            <li><i class="fas fa-check mr-2"></i>All withdrawals are reviewed for security</li>
+            <li><i class="fas fa-check mr-2"></i>Minimum withdrawal amount is $5.00</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+// Highlight selected payment method
+document.querySelectorAll('input[name="method"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        document.querySelectorAll('.payment-method-card > div').forEach(div => {
+            div.classList.remove('border-green-500', 'bg-green-50');
+        });
+        if (this.checked) {
+            this.nextElementSibling.classList.add('border-green-500', 'bg-green-50');
+        }
+    });
+});
+</script>
+{% endblock %}

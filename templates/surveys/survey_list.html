@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Available Surveys - SurveyRewards{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-8">Available Surveys</h1>
+    
+    {% if surveys %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for survey in surveys %}
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-2">
+            <div class="bg-gradient-to-r from-blue-500 to-purple-500 p-6 text-white">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="bg-white text-blue-600 px-3 py-1 rounded-full text-sm font-semibold">{{ survey.get_category_display }}</span>
+                    <span class="text-3xl font-bold">${{ survey.reward }}</span>
+                </div>
+                <h3 class="text-xl font-bold">{{ survey.title }}</h3>
+            </div>
+            <div class="p-6">
+                <p class="text-gray-600 mb-4">{{ survey.description|truncatewords:20 }}</p>
+                <div class="flex justify-between text-sm text-gray-500 mb-4">
+                    <span><i class="fas fa-clock mr-1"></i>{{ survey.estimated_time }} mins</span>
+                    <span><i class="fas fa-question-circle mr-1"></i>{{ survey.questions_count }} questions</span>
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">{{ survey.get_difficulty_display }}</span>
+                </div>
+                <a href="{% url 'survey_detail' survey.id %}" class="block text-center bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition">
+                    Take Survey <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="bg-white rounded-2xl p-12 shadow-lg text-center">
+        <i class="fas fa-inbox text-6xl text-gray-400 mb-4"></i>
+        <h2 class="text-2xl font-bold mb-4">No Surveys Available</h2>
+        <p class="text-gray-600">Check back later for new surveys!</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
