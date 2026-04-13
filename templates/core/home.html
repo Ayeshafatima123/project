@@ -4,44 +4,260 @@
 {% block title %}SurveyRewards - Earn Money by Completing Surveys{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h1 class="text-5xl font-bold mb-6">Earn Money by Sharing Your Opinion</h1>
-                <p class="text-xl mb-8 text-blue-100">Complete simple surveys and get paid instantly via JazzCash, EasyPaisa, PayPal, or Bank Transfer. Join 300,000+ users already earning!</p>
-                <div class="flex space-x-4">
-                    <a href="{% url 'register' %}" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition shadow-lg">
-                        <i class="fas fa-rocket mr-2"></i>Start Earning Now
-                    </a>
-                    <a href="#how-it-works" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-600 transition">
-                        <i class="fas fa-play-circle mr-2"></i>How It Works
-                    </a>
-                </div>
-                <div class="mt-8 flex items-center space-x-6">
-                    <div class="flex items-center">
-                        <i class="fas fa-users text-3xl mr-2"></i>
-                        <div>
-                            <p class="text-2xl font-bold">300K+</p>
-                            <p class="text-blue-200">Active Users</p>
+<!-- Hero Slideshow Section -->
+<section class="relative overflow-hidden">
+    <div id="heroSlideshow" class="relative">
+        <!-- Slide 1 -->
+        <div class="slide active bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 min-h-[600px] flex items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="animate__animated animate__fadeInLeft">
+                        <span class="inline-block bg-white text-blue-600 px-4 py-2 rounded-full text-sm font-semibold mb-6">🎯 #1 Survey Platform in Pakistan</span>
+                        <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">Earn Money by Sharing Your Opinion</h1>
+                        <p class="text-xl mb-8 text-blue-100">Complete simple surveys and get paid instantly via JazzCash, EasyPaisa, PayPal, or Bank Transfer.</p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                            <a href="{% url 'register' %}" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition shadow-lg text-center">
+                                <i class="fas fa-rocket mr-2"></i>Start Earning Now
+                            </a>
+                            <a href="#how-it-works" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-600 transition text-center">
+                                <i class="fas fa-play-circle mr-2"></i>How It Works
+                            </a>
                         </div>
                     </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-dollar-sign text-3xl mr-2"></i>
-                        <div>
-                            <p class="text-2xl font-bold">$200M+</p>
-                            <p class="text-blue-200">Paid Out</p>
-                        </div>
+                    <div class="hidden md:block">
+                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&h=500&fit=crop" alt="Earn Money" class="rounded-2xl shadow-2xl transform hover:scale-105 transition duration-500">
                     </div>
                 </div>
             </div>
-            <div class="hidden md:block">
-                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&h=500&fit=crop" alt="Earn Money" class="rounded-2xl shadow-2xl">
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide bg-gradient-to-r from-green-500 to-teal-600 text-white py-20 min-h-[600px] flex items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="inline-block bg-white text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-6">💰 Fast Payments Guaranteed</span>
+                        <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">Get Paid Within 24 Hours</h1>
+                        <p class="text-xl mb-8 text-green-100">Withdraw your earnings instantly via JazzCash, EasyPaisa, or PayPal. No minimum withdrawal limit!</p>
+                        <div class="flex flex-wrap gap-4 mb-8">
+                            <div class="bg-white bg-opacity-20 px-6 py-3 rounded-lg backdrop-blur-sm">
+                                <i class="fas fa-mobile-alt text-2xl mr-2"></i>JazzCash
+                            </div>
+                            <div class="bg-white bg-opacity-20 px-6 py-3 rounded-lg backdrop-blur-sm">
+                                <i class="fas fa-mobile-alt text-2xl mr-2"></i>EasyPaisa
+                            </div>
+                            <div class="bg-white bg-opacity-20 px-6 py-3 rounded-lg backdrop-blur-sm">
+                                <i class="fab fa-paypal text-2xl mr-2"></i>PayPal
+                            </div>
+                            <div class="bg-white bg-opacity-20 px-6 py-3 rounded-lg backdrop-blur-sm">
+                                <i class="fas fa-university text-2xl mr-2"></i>Bank
+                            </div>
+                        </div>
+                        <a href="{% url 'register' %}" class="inline-block bg-white text-green-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition shadow-lg">
+                            <i class="fas fa-wallet mr-2"></i>Withdraw Now
+                        </a>
+                    </div>
+                    <div class="hidden md:block">
+                        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=500&fit=crop" alt="Fast Payments" class="rounded-2xl shadow-2xl transform hover:scale-105 transition duration-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide bg-gradient-to-r from-orange-500 to-red-600 text-white py-20 min-h-[600px] flex items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="inline-block bg-white text-orange-600 px-4 py-2 rounded-full text-sm font-semibold mb-6">🎉 New Surveys Added Daily</span>
+                        <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">Earn $0.50 to $5.00 Per Survey</h1>
+                        <p class="text-xl mb-8 text-orange-100">New surveys available every day! Answer simple questions about products, services, and your preferences.</p>
+                        <div class="grid grid-cols-3 gap-4 mb-8">
+                            <div class="bg-white bg-opacity-20 px-4 py-3 rounded-lg text-center backdrop-blur-sm">
+                                <p class="text-3xl font-bold">5K+</p>
+                                <p class="text-sm">Active Surveys</p>
+                            </div>
+                            <div class="bg-white bg-opacity-20 px-4 py-3 rounded-lg text-center backdrop-blur-sm">
+                                <p class="text-3xl font-bold">$5</p>
+                                <p class="text-sm">Max Reward</p>
+                            </div>
+                            <div class="bg-white bg-opacity-20 px-4 py-3 rounded-lg text-center backdrop-blur-sm">
+                                <p class="text-3xl font-bold">10min</p>
+                                <p class="text-sm">Avg. Time</p>
+                            </div>
+                        </div>
+                        <a href="{% url 'register' %}" class="inline-block bg-white text-orange-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition shadow-lg">
+                            <i class="fas fa-clipboard-check mr-2"></i>Start Surveys
+                        </a>
+                    </div>
+                    <div class="hidden md:block">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=500&fit=crop" alt="Daily Surveys" class="rounded-2xl shadow-2xl transform hover:scale-105 transition duration-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide bg-gradient-to-r from-purple-500 to-pink-600 text-white py-20 min-h-[600px] flex items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="inline-block bg-white text-purple-600 px-4 py-2 rounded-full text-sm font-semibold mb-6">👥 Earn More with Friends</span>
+                        <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">Refer Friends & Earn $1 Bonus</h1>
+                        <p class="text-xl mb-8 text-purple-100">Share your unique referral code and earn $1.00 for every friend who joins plus 10% of their lifetime earnings!</p>
+                        <div class="bg-white bg-opacity-20 p-6 rounded-lg backdrop-blur-sm mb-8">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-white p-3 rounded-full mr-4">
+                                    <i class="fas fa-gift text-purple-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-lg">Referral Program</p>
+                                    <p class="text-purple-100">$1 signup bonus + 10% lifetime commission</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{% url 'register' %}" class="inline-block bg-white text-purple-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition shadow-lg">
+                            <i class="fas fa-user-plus mr-2"></i>Join & Refer
+                        </a>
+                    </div>
+                    <div class="hidden md:block">
+                        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&h=500&fit=crop" alt="Referral Program" class="rounded-2xl shadow-2xl transform hover:scale-105 transition duration-500">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Slideshow Navigation Arrows -->
+    <button id="prevSlide" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-50 text-white p-4 rounded-full shadow-lg transition backdrop-blur-sm">
+        <i class="fas fa-chevron-left text-2xl"></i>
+    </button>
+    <button id="nextSlide" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-50 text-white p-4 rounded-full shadow-lg transition backdrop-blur-sm">
+        <i class="fas fa-chevron-right text-2xl"></i>
+    </button>
+
+    <!-- Slideshow Navigation Dots -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
+        <button class="slide-dot active w-4 h-4 rounded-full bg-white transition-all duration-300" data-slide="0"></button>
+        <button class="slide-dot w-4 h-4 rounded-full bg-white bg-opacity-50 transition-all duration-300" data-slide="1"></button>
+        <button class="slide-dot w-4 h-4 rounded-full bg-white bg-opacity-50 transition-all duration-300" data-slide="2"></button>
+        <button class="slide-dot w-4 h-4 rounded-full bg-white bg-opacity-50 transition-all duration-300" data-slide="3"></button>
+    </div>
 </section>
+
+<!-- Slideshow CSS & JavaScript -->
+<style>
+.slide {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+.slide.active {
+    display: block;
+    opacity: 1;
+}
+.slide-dot {
+    cursor: pointer;
+}
+.slide-dot.active {
+    background: white;
+    width: 2rem;
+    opacity: 1;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slide-dot');
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+    let currentSlide = 0;
+    let slideInterval;
+
+    function showSlide(index) {
+        // Remove active class from all slides and dots
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+            slide.style.display = 'none';
+        });
+        dots.forEach(dot => {
+            dot.classList.remove('active');
+            dot.style.opacity = '0.5';
+        });
+
+        // Add active class to current slide and dot
+        slides[index].classList.add('active');
+        slides[index].style.display = 'flex';
+        dots[index].classList.add('active');
+        dots[index].style.opacity = '1';
+
+        currentSlide = index;
+    }
+
+    function nextSlide() {
+        let next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+    }
+
+    function prevSlide() {
+        let prev = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prev);
+    }
+
+    // Auto-play slideshow every 5 seconds
+    function startSlideshow() {
+        slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    function stopSlideshow() {
+        clearInterval(slideInterval);
+    }
+
+    // Event listeners
+    nextBtn.addEventListener('click', function() {
+        stopSlideshow();
+        nextSlide();
+        startSlideshow();
+    });
+
+    prevBtn.addEventListener('click', function() {
+        stopSlideshow();
+        prevSlide();
+        startSlideshow();
+    });
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            stopSlideshow();
+            showSlide(parseInt(this.dataset.slide));
+            startSlideshow();
+        });
+    });
+
+    // Pause on hover
+    const slideshow = document.getElementById('heroSlideshow');
+    slideshow.addEventListener('mouseenter', stopSlideshow);
+    slideshow.addEventListener('mouseleave', startSlideshow);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            stopSlideshow();
+            prevSlide();
+            startSlideshow();
+        } else if (e.key === 'ArrowRight') {
+            stopSlideshow();
+            nextSlide();
+            startSlideshow();
+        }
+    });
+
+    // Initialize
+    showSlide(0);
+    startSlideshow();
+});
+</script>
 
 <!-- Stats Section -->
 <section class="py-12 bg-white shadow-md">
