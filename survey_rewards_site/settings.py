@@ -30,12 +30,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-(dnx4d3-&#-ud#5*-=ocsbam%jfuenef=h8y=d6d4)7$3i73aa')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# TEMPORARILY enabled for debugging on Vercel
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+# Disable DEBUG in production (Vercel)
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 if '*' not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append('*')
+
+# Add Vercel domains
+ALLOWED_HOSTS.extend([
+    '.vercel.app',
+    'localhost',
+    '127.0.0.1',
+])
 
 
 # Application definition
@@ -153,17 +160,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # WhiteNoise for static files in production
-# Use simpler storage for Vercel serverless
-import os
-if os.environ.get('VERCEL'):
-    STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
-else:
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Simplified configuration for Vercel
+WHITENOISE_MAX_AGE = 31536000  # 1 year
+WHITENOISE_ALLOW_ALL_ORIGINS = True
+
+# Use simple storage for all environments
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

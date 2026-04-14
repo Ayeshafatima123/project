@@ -8,12 +8,24 @@
         "maxLambdaSize": "15mb",
         "runtime": "python3.12"
       }
+    },
+    {
+      "src": "static/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "api/index.py"
     }
-  ]
+  ],
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "survey_rewards_site.settings",
+    "PYTHONPATH": "/vercel/path0"
+  }
 }

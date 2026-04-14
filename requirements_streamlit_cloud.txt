@@ -1,0 +1,4 @@
+# Streamlit Cloud Requirements
+# This file is for Streamlit deployment only
+streamlit>=1.28.0
+pandas>=2.0.0
