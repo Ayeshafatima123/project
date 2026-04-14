@@ -1,5 +1,5 @@
 """
-Vercel Serverless Entry Point for Django - MINIMAL VERSION FOR TESTING
+Vercel Serverless Entry Point for Django
 """
 import os
 import sys
@@ -8,39 +8,51 @@ import sys
 project_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_path)
 
-# Set Django settings
+# Set Django settings  
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'survey_rewards_site.settings')
 
-# Try to import Django and see what happens
+# Now try to load Django
 try:
     from django.core.wsgi import get_wsgi_application
-    application = get_wsgi_application()
+    django_app = get_wsgi_application()
+    
+    # Django loaded successfully - use it
+    application = django_app
+    
+    # Run migrations in background (don't block requests)
+    try:
+        from django.core.management import call_command
+        call_command('migrate', '--run-syncdb', verbosity=0)
+    except:
+        pass
+        
 except Exception as e:
-    # Return a simple error page to see what's wrong
+    # Django failed - show detailed error
     import traceback
     error_html = f"""
     <!DOCTYPE html>
     <html>
-    <head><title>Django Import Error</title></head>
+    <head><title>Django Error</title></head>
     <body style="font-family: monospace; padding: 40px;">
         <h1 style="color: red;">Django Failed to Load</h1>
-        <pre>{traceback.format_exc()}</pre>
-        <h2>Error:</h2>
+        <h2>Exception:</h2>
         <pre>{str(e)}</pre>
+        <h2>Traceback:</h2>
+        <pre>{traceback.format_exc()}</pre>
     </body>
     </html>
-    """
+    """.encode('utf-8')
     
-    def simple_app(environ, start_response):
+    def error_app(environ, start_response):
         status = '500 Internal Server Error'
         response_headers = [
             ('Content-Type', 'text/html; charset=utf-8'),
-            ('Content-Length', str(len(error_html.encode('utf-8')))),
+            ('Content-Length', str(len(error_html))),
         ]
         start_response(status, response_headers)
-        return [error_html.encode('utf-8')]
+        return [error_html]
     
-    application = simple_app
+    application = error_app
 
-# Vercel also looks for 'app'
+# Vercel looks for 'app'
 app = application
