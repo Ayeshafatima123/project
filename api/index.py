@@ -11,26 +11,17 @@ sys.path.insert(0, project_path)
 # Set Django settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'survey_rewards_site.settings')
 
-# Setup Django
+# Setup Django and run migrations
 import django
-django.setup()
+from django.conf import settings
 
-# Run migrations on each cold start (necessary for serverless)
-from django.core.management import call_command
-try:
-    # Check if database exists, if not create it and run migrations
-    from django.conf import settings
-    db_path = settings.DATABASES['default'].get('NAME', '')
-    
-    # For SQLite, check if database file exists or if using /tmp
-    is_sqlite = 'sqlite' in settings.DATABASES['default']['ENGINE']
-    needs_migration = not is_sqlite or (is_sqlite and '/tmp' in str(db_path))
-    
-    if needs_migration:
-        call_command('migrate', '--run-syncdb', verbosity=0)
-except Exception as e:
-    # If migrations fail, log but continue (will show error page)
-    print(f"Migration warning: {e}")
+# Run migrations before loading Django
+if not settings.DEBUG:
+    try:
+        from django.core.management import execute_from_command_line
+        execute_from_command_line(['manage.py', 'migrate', '--run-syncdb', '--verbosity=0'])
+    except Exception as e:
+        print(f"Migration note: {e}")
 
 # Import Django WSGI application
 from django.core.wsgi import get_wsgi_application
