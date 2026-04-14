@@ -95,12 +95,25 @@ if os.environ.get('DATABASE_URL') and HAS_DB_URL:
         )
     }
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+    # On Vercel serverless, use /tmp for SQLite (temporary)
+    # For production, set DATABASE_URL environment variable with PostgreSQL
+    import sys
+    if os.environ.get('VERCEL'):
+        # Vercel's serverless environment - use /tmp (data won't persist)
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': '/tmp/db.sqlite3',
+            }
         }
-    }
+    else:
+        # Local development
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
 
 
 # Password validation
