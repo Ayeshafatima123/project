@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',  # Uncomment for production/Vercel
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -142,7 +142,12 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # WhiteNoise for static files in production
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Use simpler storage for Vercel serverless
+import os
+if os.environ.get('VERCEL'):
+    STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -151,11 +156,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom User Model
 AUTH_USER_MODEL = 'users.User'
-
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Media files
 MEDIA_URL = 'media/'
