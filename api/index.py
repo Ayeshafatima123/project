@@ -31,13 +31,5 @@ from django.core.wsgi import get_wsgi_application
 
 application = get_wsgi_application()
 
-# Custom error handler for debugging
-def handler(request, context):
-    try:
-        return application(request, context)
-    except Exception as e:
-        # Return detailed error for debugging
-        import traceback
-        error_details = traceback.format_exc()
-        print(f"ERROR: {error_details}")
-        raise
+# Vercel also looks for 'app'
+app = application
