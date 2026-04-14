@@ -11,19 +11,33 @@ sys.path.insert(0, project_path)
 # Set Django settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'survey_rewards_site.settings')
 
-# Setup Django and run migrations
+# Setup Django
 import django
 from django.conf import settings
 
-# Run migrations before loading Django
-if not settings.DEBUG:
-    try:
-        from django.core.management import execute_from_command_line
-        execute_from_command_line(['manage.py', 'migrate', '--run-syncdb', '--verbosity=0'])
-    except Exception as e:
-        print(f"Migration note: {e}")
+# Initialize Django
+django.setup()
+
+# Run migrations (required for serverless on each cold start)
+try:
+    from django.core.management import call_command
+    call_command('migrate', '--run-syncdb', verbosity=0)
+except Exception as e:
+    # Log but don't fail - migrations might already be applied
+    print(f"Migration info: {e}")
 
 # Import Django WSGI application
 from django.core.wsgi import get_wsgi_application
 
 application = get_wsgi_application()
+
+# Custom error handler for debugging
+def handler(request, context):
+    try:
+        return application(request, context)
+    except Exception as e:
+        # Return detailed error for debugging
+        import traceback
+        error_details = traceback.format_exc()
+        print(f"ERROR: {error_details}")
+        raise
